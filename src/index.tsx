@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore from './store';
-import axios from 'axios';
+import UsersListTable from './pages/users-list/users-list-table/users-list-table';
+import {doFetch} from './utils';
 import './index.css';
 
 const App = () => {
@@ -16,13 +17,9 @@ const App = () => {
     }
 };
 
-  axios({
-    method: "post",
-    url: "https://app.fakejson.com/q",
-    data: payload
-  }).then(function(resp) {
-    console.log(resp);
-  });
+  console.log(doFetch(
+    payload, {method: 'post', url: 'https://app.fakejson.com/q'}
+  ));
 
   return <div></div>
 }
@@ -30,7 +27,7 @@ const App = () => {
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={configureStore()}>
-      <App />
+      <UsersListTable users={[]} />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
