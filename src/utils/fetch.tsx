@@ -6,7 +6,7 @@ interface Options {
 };
 
 export default async (payload: any, options: Options) => {
-  const {method, url} = options;
+  const {method = 'post', url = ''} = options;
   const result = await axios({
     method,
     url,
