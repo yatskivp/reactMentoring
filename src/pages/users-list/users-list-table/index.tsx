@@ -1,1 +1,0 @@
-export {default as UsersListTableContainer} from './users-list-table-container';

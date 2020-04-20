@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import { users } from './users-reducer'
+import { setUsers } from './users-list/reducer';
 
 export const rootReducer = combineReducers({
-  users,
+  users: setUsers,
 });
