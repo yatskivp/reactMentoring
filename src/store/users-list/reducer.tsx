@@ -6,13 +6,26 @@ interface IAction {
 };
 
 const initState: IUsersListState = {
-   users: [] 
+  users: [],
+  selectedUser: {
+    name: '',
+    lname: '',
+    email: '',
+    gender: '',
+    loginInfo: {
+      dateTime: '',
+      ipv4: '',
+    },
+    id: '',
+  },
 };
 
-export const setUsers = (state = initState, action: IAction) => {
+export const usersReducer = (state = initState, action: IAction) => {
   switch (action.type) {
     case actionTypes.SET_USERS:
       return {...state, users: action.payload};
+    case actionTypes.SET_SELECTED_USER:
+      return {...state, selectedUser: action.payload};
     default:
       return state;
   }

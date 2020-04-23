@@ -1,5 +1,6 @@
 export enum actionTypes {
   SET_USERS = '@@users/SET_USERS',
+  SET_SELECTED_USER = '@@users/SET_SELECTED_USER',
 };
 
 export interface IUser {
@@ -16,4 +17,5 @@ export interface IUser {
 
 export interface IUsersListState {
   readonly users: IUser[],
+  readonly selectedUser: IUser,
 };

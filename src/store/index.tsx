@@ -1,7 +1,11 @@
 import { combineReducers } from 'redux';
-
-import { setUsers } from './users-list/reducer';
+import { usersReducer } from './users-list/reducer';
+import { IUsersListState } from './users-list/types';
 
 export const rootReducer = combineReducers({
-  users: setUsers,
+  users: usersReducer,
 });
+
+export interface IState {
+  users: IUsersListState,
+};
