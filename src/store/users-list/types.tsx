@@ -18,4 +18,5 @@ export interface IUser {
 export interface IUsersListState {
   readonly users: IUser[],
   readonly selectedUser: IUser,
+  readonly isUserSelected?: boolean,
 };
