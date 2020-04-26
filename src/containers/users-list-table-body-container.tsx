@@ -40,9 +40,9 @@ class UsersListTableBodyContainer extends React.Component<IProps & IMapDispatchT
     }
   }
 
-  handleRowClick = (row: IUser, cb: (isFormVisible: boolean) => void) => {
+  handleRowClick = (row: IUser, handleFormVisibility: (isFormVisible: boolean) => void) => {
     this.props.selectUser(row);
-    cb(true);
+    handleFormVisibility(true);
   }
 
   render() {

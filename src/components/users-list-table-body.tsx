@@ -16,14 +16,14 @@ const rowStyles = {
 const StyledTableRow = withStyles(rowStyles)(TableRow);
 
 interface IProps {
-  handleFormVisibility?: (isFormVisible: boolean) => void
+  handleFormVisibility: (isFormVisible: boolean) => void;
 }
-// TODO
-//type IHandleRowClick = (row: IUser, handler: (isFormVisible: boolean) => void) => void;
+
+type IHandleRowClick = (row: IUser, handler: (isFormVisible: boolean) => void) => void;
 
 export default (props: IProps) => 
   <UsersListTableBodyContainer>
-    {(rows: IUser[], handleRowClick: any) => (
+    {(rows: IUser[], handleRowClick: IHandleRowClick) => (
       <TableBody>
         {rows.map(
           row =>

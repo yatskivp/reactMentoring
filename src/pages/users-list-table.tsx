@@ -5,7 +5,7 @@ import TableHeader from '../components/users-list-table-header';
 import TableBody from '../components/users-list-table-body';
 
 interface IProps {
-  handleFormVisibility?: (isFormVisible: boolean) => void
+  handleFormVisibility: (isFormVisible: boolean) => void
 }
 
 export default (props: IProps) =>
