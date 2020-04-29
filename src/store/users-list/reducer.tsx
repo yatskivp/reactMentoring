@@ -12,10 +12,8 @@ export const initState: IUsersListState = {
     lname: '',
     email: '',
     gender: '',
-    loginInfo: {
-      dateTime: '',
-      ipv4: '',
-    },
+    address: '',
+    mobile: '',
     id: '',
   },
   isUserSelected: false

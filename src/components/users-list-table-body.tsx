@@ -4,19 +4,24 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import { withStyles } from '@material-ui/core/styles';
 import UsersListTableBodyContainer from '../containers/users-list-table-body-container';
-import withUser from './with-user-hoc';
 import {IUser} from '../store/users-list/types'
 
 const rowStyles = {
   hover: {
-    cursor: 'pointer',
+    cursor: 'pointer'
   },
+  root: {
+    '&:last-child:hover': {
+      
+    },
+  }
 };
 
 const StyledTableRow = withStyles(rowStyles)(TableRow);
 
 interface IProps {
-  handleFormVisibility: (isFormVisible: boolean) => void;
+  handleFormVisibility: (isFormVisible: boolean) => void,
+  columns: {id: string, label: string}[],
 }
 
 type IHandleRowClick = (row: IUser, handler: (isFormVisible: boolean) => void) => void;
@@ -28,7 +33,9 @@ export default (props: IProps) =>
         {rows.map(
           row =>
             <StyledTableRow key={row.id} onClick={handleRowClick.bind(null, row, props.handleFormVisibility)} hover>
-              {withUser(TableCell, row)}
+              {props.columns.map(({id}) => (
+                <TableCell key={id}>{ row[id] }</TableCell>
+              ))}
             </StyledTableRow>
           )}
       </TableBody>

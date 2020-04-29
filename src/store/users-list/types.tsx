@@ -8,11 +8,10 @@ export interface IUser {
   lname: string,
   email: string,
   gender: string,
-  loginInfo: {
-    dateTime: string,
-    ipv4: string,
-  },
+  address: string,
+  mobile: string,
   id: string,
+  [index: string]: string,
 };
 
 export interface IUsersListState {

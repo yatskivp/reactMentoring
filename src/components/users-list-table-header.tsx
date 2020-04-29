@@ -4,8 +4,6 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import { withStyles, Theme, createStyles } from '@material-ui/core/styles';
 
-const columnsLabel: string[] = ['First Name', 'Last Name', 'Email', 'Gender', 'Login Time', 'User IP'];
-
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
     head: {
@@ -15,10 +13,14 @@ const StyledTableCell = withStyles((theme: Theme) =>
   }),
 )(TableCell);
 
-export default () =>
+interface IProps {
+  columns: {id: string, label: string}[],
+};
+
+export default ({columns}: IProps) =>
   <TableHead>
     <TableRow>
-      {columnsLabel.map(columnLabel => 
-        <StyledTableCell key={columnLabel}>{columnLabel}</StyledTableCell>)}
+      {columns.map(column => 
+        <StyledTableCell key={column.id}>{column.label}</StyledTableCell>)}
     </TableRow>
   </TableHead>
