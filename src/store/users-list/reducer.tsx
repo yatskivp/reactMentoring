@@ -16,15 +16,19 @@ export const initState: IUsersListState = {
     mobile: '',
     id: '',
   },
-  isUserSelected: false
+  isUserSelected: false,
+  isUsersLoading: false,
+  isUsersFail: false,
 };
 
-export const usersReducer = (state = initState, action: IAction) => {
-  switch (action.type) {
-    case actionTypes.SET_USERS:
-      return {...state, users: action.payload};
+export const usersReducer = (state = initState, {type, payload}: IAction) => {
+  switch (type) {
+    case actionTypes.SET_USERS_LOADING:
+    case actionTypes.SET_USERS_SUCCESS:
+    case actionTypes.SET_USERS_FAIL:
+      return {...state, users: payload.users, isUsersLoading: payload.isUsersLoading, isUsersFail: payload.isUsersFail}
     case actionTypes.SET_SELECTED_USER:
-      return {...state, isUserSelected: true, selectedUser: action.payload};
+      return {...state, isUserSelected: true, selectedUser: payload};
     default:
       return state;
   }

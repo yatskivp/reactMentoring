@@ -1,22 +1,52 @@
-import {actionTypes, IUser} from './types';
-import {doFetch} from '../../utils';
+import { actionTypes, IUser, IUsersListState } from './types';
+import { doFetch, payload} from '../../utils';
 
 interface IAction {
   type: actionTypes,
-  payload?: IUser[] | IUser,
+  payload?: {
+    users: IUser[] | IUser | [],
+    isUsersLoading: boolean,
+    isUsersFail: boolean,
+  } | IUser
 };
 
 type IDispatch = (arg: IAction) => (IAction);
 
-const SET_USERS = (users: IUser[]) => ({type: actionTypes.SET_USERS, payload: users});
+const SET_USERS_LOADING = (users: IUser[]) => ({
+  type: actionTypes.SET_USERS_LOADING, 
+  payload: {
+    users,
+    isUsersLoading: true,
+    isUsersFail: false,
+}});
+
+const SET_USERS_SUCCESS = (users: IUser[]) => ({
+  type: actionTypes.SET_USERS_SUCCESS, 
+  payload: {
+    users,
+    isUsersLoading: false,
+    isUsersFail: false,
+}});
+
+const SET_USERS_FAIL = (users: IUser[]) => ({
+  type: actionTypes.SET_USERS_FAIL, 
+  payload: {
+    users,
+    isUsersLoading: false,
+    isUsersFail: true,
+}});
+
 const SET_SELECTED_USER = (user: IUser) => ({type: actionTypes.SET_SELECTED_USER, payload: user});
 
-export const getUsers = (payload: Object) => async (dispatch: IDispatch) => {
+export const getUsers = () => async (dispatch: IDispatch, getState: () => IUsersListState) => {
   try{
+    dispatch(SET_USERS_LOADING([]));
+
     const result = await doFetch(payload, {url: 'https://app.fakejson.com/q'});
 
-    dispatch(SET_USERS(result.data));
+    dispatch(SET_USERS_SUCCESS(result.data));
   } catch (error) {
+    dispatch(SET_USERS_FAIL(getState().users));
     console.log(`getUsers error: ${error}`);
   }
 };
