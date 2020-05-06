@@ -1,4 +1,5 @@
-import { actionTypes, IUser, IUsersListState } from './types';
+import { actionTypes, IUser } from './types';
+import { IState } from '../';
 import { doFetch, payload} from '../../utils';
 
 interface IAction {
@@ -38,7 +39,7 @@ const SET_USERS_FAIL = (users: IUser[]) => ({
 
 const SET_SELECTED_USER = (user: IUser) => ({type: actionTypes.SET_SELECTED_USER, payload: user});
 
-export const getUsers = () => async (dispatch: IDispatch, getState: () => IUsersListState) => {
+export const getUsers = () => async (dispatch: IDispatch, getState: () => IState) => {
   try{
     dispatch(SET_USERS_LOADING([]));
 
@@ -46,7 +47,7 @@ export const getUsers = () => async (dispatch: IDispatch, getState: () => IUsers
 
     dispatch(SET_USERS_SUCCESS(result.data));
   } catch (error) {
-    dispatch(SET_USERS_FAIL(getState().users));
+    dispatch(SET_USERS_FAIL(getState().users.users));
     console.log(`getUsers error: ${error}`);
   }
 };
