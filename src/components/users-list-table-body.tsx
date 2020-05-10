@@ -28,11 +28,11 @@ type IHandleRowClick = (row: IUser, handler: (isFormVisible: boolean) => void) =
 
 export default (props: IProps) => 
   <UsersListTableBodyContainer>
-    {(rows: IUser[], handleRowClick: IHandleRowClick) => (
+    {(rows: IUser[], handleRowClick: any) => (
       <TableBody>
         {rows.map(
           row =>
-            <StyledTableRow key={row.id} onClick={handleRowClick.bind(null, row, props.handleFormVisibility)} hover>
+            <StyledTableRow key={row.id} onClick={() => handleRowClick(row, props.handleFormVisibility)} hover>
               {props.columns.map(({id}) => (
                 <TableCell key={id}>{ row[id] }</TableCell>
               ))}
