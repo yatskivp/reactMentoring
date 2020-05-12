@@ -18,17 +18,3 @@ export const columns = [
     id: 'mobile',
     label: 'Mobile'
 }];
-
-export const payload = {
-  "token": process.env.REACT_APP_FAKE_JSON_TOKEN,
-  "data": {
-    "id": "personNickname",
-    "name": "nameFirst",
-    "lname": "nameLast",
-    "email": "internetEmail",
-    "gender": "personGender",
-    "address": "addressFullStreet",
-    "mobile": "phoneMobile",
-    "_repeat": 10
-  }
-};

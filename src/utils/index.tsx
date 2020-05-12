@@ -1,2 +1,3 @@
-export {default as doFetch} from './fetch';
-export { columns, payload } from './table-config';
+export { default as doFetch } from './fetch';
+export type { IParams } from './fetch';
+export { columns } from './table-config';

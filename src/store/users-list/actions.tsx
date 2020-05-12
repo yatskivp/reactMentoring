@@ -1,61 +1,61 @@
 import { actionTypes, IUser } from './types';
-import { IState } from '../';
-import { doFetch, payload} from '../../utils';
+import { doFetch, IParams} from '../../utils';
+
+type IPayload = IUser[] | IUser | [] | null;
 
 interface IAction {
-  type: actionTypes,
-  payload?: {
-    users: IUser[] | IUser | [],
-    isUsersLoading: boolean,
-    isUsersFail: boolean,
-  } | IUser
+  type: actionTypes | string,
+  payload?: IPayload | IUser | null,
 };
 
 type IDispatch = (arg: IAction) => (IAction);
 
-const SET_USERS_LOADING = (users: IUser[]) => ({
-  type: actionTypes.SET_USERS_LOADING, 
-  payload: {
-    users,
-    isUsersLoading: true,
-    isUsersFail: false,
-}});
+const generateAsyncActions = (type: actionTypes | string, prefix: string) => (
+  { REQUEST: `@@${prefix}/${type}_REQUEST`, SUCCESS: `@@${prefix}/${type}_SUCCESS`, FAIL: `@@${prefix}/${type}_FAIL` }
+);
 
-const SET_USERS_SUCCESS = (users: IUser[]) => ({
-  type: actionTypes.SET_USERS_SUCCESS, 
-  payload: {
-    users,
-    isUsersLoading: false,
-    isUsersFail: false,
-}});
+const createAction = (type: actionTypes | string, payload?: IPayload | null) => ({type, payload});
 
-const SET_USERS_FAIL = (users: IUser[]) => ({
-  type: actionTypes.SET_USERS_FAIL, 
-  payload: {
-    users,
-    isUsersLoading: false,
-    isUsersFail: true,
-}});
+const createServiceAction = async (actionType: actionTypes | string, actionPrefix: string, serviceOptions: IParams | null, payload: IPayload, dispatch: IDispatch) => {
+  const { REQUEST, SUCCESS, FAIL } = generateAsyncActions(actionType, actionPrefix);
 
-const SET_SELECTED_USER = (user: IUser) => ({type: actionTypes.SET_SELECTED_USER, payload: user});
-
-export const getUsers = () => async (dispatch: IDispatch, getState: () => IState) => {
-  try{
-    dispatch(SET_USERS_LOADING([]));
-
-    const result = await doFetch(payload, {url: 'https://app.fakejson.com/q'});
-
-    dispatch(SET_USERS_SUCCESS(result.data));
-  } catch (error) {
-    dispatch(SET_USERS_FAIL(getState().users.users));
-    console.log(`getUsers error: ${error}`);
+  if (serviceOptions) {
+    try {
+      dispatch(createAction(REQUEST));
+      const result = await doFetch(serviceOptions);
+      dispatch(createAction(SUCCESS, result.data));
+    } catch (error) {
+      dispatch(createAction(FAIL));
+    }
+  } else {
+    dispatch(createAction(SUCCESS, payload));
   }
 };
 
+export const getUsers = () => async (dispatch: IDispatch) => {
+  const serviceOptions = {
+    payload : {
+      "token": process.env.REACT_APP_FAKE_JSON_TOKEN,
+      "data": {
+        "id": "personNickname",
+        "name": "nameFirst",
+        "lname": "nameLast",
+        "email": "internetEmail",
+        "gender": "personGender",
+        "address": "addressFullStreet",
+        "mobile": "phoneMobile",
+        "_repeat": 10
+      }
+    },
+    options: {
+      method: 'post' as 'post',
+      url: 'https://app.fakejson.com/q'
+    }
+  };
+
+  createServiceAction('SET_USERS', 'users', serviceOptions, null, dispatch);
+};
+
 export const selectUser = (user: IUser) => (dispatch: IDispatch) => {
-  try{
-    dispatch(SET_SELECTED_USER(user));
-  } catch (error) {
-    console.log(`selectUser error: ${error}`);
-  }
+  createServiceAction('SET_SELECTED_USER', 'users', null, user, dispatch);
 };

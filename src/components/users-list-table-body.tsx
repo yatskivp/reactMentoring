@@ -32,7 +32,7 @@ export default (props: IProps) =>
       <TableBody>
         {rows.map(
           row =>
-            <StyledTableRow key={row.id} onClick={handleRowClick.bind(null, row, props.handleFormVisibility)} hover>
+            <StyledTableRow key={row.id} onClick={() => handleRowClick(row, props.handleFormVisibility)} hover>
               {props.columns.map(({id}) => (
                 <TableCell key={id}>{ row[id] }</TableCell>
               ))}

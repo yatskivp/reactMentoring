@@ -14,16 +14,16 @@ interface IProps {
 }
 
 export default (props: IProps) => {
-  const isLoading = useSelector(({ users }: IState) => users.isUsersLoading);
-  const isError = useSelector(({ users }: IState) => users.isUsersFail);
+  const isLoading = useSelector(({ users }: IState) => users.isLoading);
+  const error = useSelector(({ users }: IState) => users.error);
 
   return (
     <>
       { isLoading ? 
       <Loader /> : null }
 
-      { isError ? 
-      <Notification status='error' message="Something went wrong. Please, try again later."/> : null }
+      { error ? 
+      <Notification status='error' message={error}/> : null }
 
       <TableContainer>
         <Table>
