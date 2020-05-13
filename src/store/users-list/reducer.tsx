@@ -30,6 +30,7 @@ export const usersReducer = (state = initState, {type, payload}: IAction) => {
     case actionTypes.SET_USERS_FAIL:
       return {...state, isLoading: false, error: 'Unable to get users.' }
     case actionTypes.SET_SELECTED_USER_SUCCESS:
+      console.log(payload);
       return {...state, isUserSelected: true, selectedUser: payload};
     default:
       return state;

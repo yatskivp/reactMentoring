@@ -1,5 +1,5 @@
 import React from 'react';
-import SelectedUserForm from '../components/selected-user-form';
+import SelectedUserForm from '../components/SelectedUserForm';
 
 export default (props: any) => <SelectedUserForm {...props}/>
   

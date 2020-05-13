@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import Table from '@material-ui/core/Table';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHeader from '../components/users-list-table-header';
-import TableBody from '../components/users-list-table-body';
-import Loader from '../components/loader';
-import Notification from '../components/notifications';
+import TableBody from '../components/UsersListTableBody';
+import Loader from '../components/Loader';
+import Notification from '../components/Notifications';
 import { columns } from '../utils';
 import { IState } from '../store';
 
@@ -19,11 +19,9 @@ export default (props: IProps) => {
 
   return (
     <>
-      { isLoading ? 
-      <Loader /> : null }
+      { isLoading && <Loader /> }
 
-      { error ? 
-      <Notification status='error' message={error}/> : null }
+      { error && <Notification status='error' message={error}/> }
 
       <TableContainer>
         <Table>

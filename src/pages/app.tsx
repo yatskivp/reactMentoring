@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import UsersListTable from './users-list-table';
-import SelectedUser from './selected-user';
+import UsersListTable from './UsersListTable';
+import SelectedUser from './SelectedUser';
 
 type IHandleFormVisibility = (isFormVisible: boolean) => void;
 

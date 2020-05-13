@@ -1,3 +1,3 @@
-export {default as UsersListTable} from './users-list-table';
-export {default as SelectedUser} from './selected-user';
-export {default as App} from './app';
+export {default as UsersListTable} from './UsersListTable';
+export {default as SelectedUser} from './SelectedUser';
+export {default as App} from './App';

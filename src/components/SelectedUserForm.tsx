@@ -3,7 +3,7 @@ import { TextField } from '@material-ui/core';
 import { Paper } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import SelectedUserFormContainer from '../containers/selected-user-form-container';
+import SelectedUserFormContainer from '../containers/SelectedUserFormContainer';
 import { IUser } from '../store/users-list/types';
 
 const useStyles = makeStyles({
