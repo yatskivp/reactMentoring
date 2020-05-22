@@ -38,7 +38,8 @@ export const usersReducer = (state = initState, {type, payload}: IAction) => {
         users: state.users.slice().reduce((newUsers, user, index) => {
           if (user.id === state.selectedUser.id) {
             newUsers.push({ ...user, ...payload });
-          } else if (newUsers.length === index + 1) {
+          } else if (state.users.length === index + 1) {
+            newUsers.push(user);
             newUsers.push({ ...payload });
           } else {
             newUsers.push(user);
