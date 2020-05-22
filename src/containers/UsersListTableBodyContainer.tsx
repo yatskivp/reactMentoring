@@ -2,7 +2,7 @@ import * as React from 'react'
 import { connect } from 'react-redux';
 import { getUsers, selectUser } from '../store/users-list/actions';
 import { IUser } from '../store/users-list/types';
-import { IState } from '../store'; 
+import { IStore } from '../store'; 
 
 interface IProps {
   children?: (users: IUser[], handler: (row: IUser, cb: (isFormVisible: boolean) => void) => void) => React.ReactElement,
@@ -41,7 +41,7 @@ UsersListTableBodyContainer.defaultProps = {
   isFormVisible: false,
 };
 
-const mapSateToProps = (state: IState) => ({
+const mapSateToProps = (state: IStore) => ({
   users: state.users.users,
   isFormVisible: state.users.isUserSelected,
 });

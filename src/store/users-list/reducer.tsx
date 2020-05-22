@@ -34,7 +34,7 @@ export const usersReducer = (state = initState, {type, payload}: IAction) => {
     case actionTypes.EDIT_SELECTED_USER_SUCCESS:
       return {
         ...state, 
-        selectedUser: { ...state.selectedUser, ...payload },
+        selectedUser: { ...payload },
         users: state.users.slice().reduce((newUsers, user, index) => {
           if (user.id === state.selectedUser.id) {
             newUsers.push({ ...user, ...payload });

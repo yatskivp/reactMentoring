@@ -21,28 +21,12 @@ const useStyles = makeStyles({
 
 export default function SelectedUserForm(props: IProps) {
   const classes = useStyles();
-  const [editedUser, setEditedUser] = useState({});
-
-  const onChange = ({ target }: React.SyntheticEvent) => {
-    const { value, name } = target as HTMLInputElement;
-    setEditedUser({ ...editedUser, [name]: value });
-  };
-
-  const handleSaveBtnClick: () => void = () => {
-    props.handleSaveBtnClick(editedUser);
-  };
-
-  const handleCancleBtnClick: () => void = () => {
-    setEditedUser({});
-    console.log('ss');
-  };
 
   return (
-    <>
-    <Paper>
-      <SelectedUserFormContainer>
-        {(selectedUser: IUser) => (
-          <> 
+    <SelectedUserFormContainer>
+      {(selectedUser: IUser, handleSaveBtnClick, handleCancleBtnClick, handleChangeValue) => (
+        <>
+          <Paper> 
             <Typography variant="h4" gutterBottom align="center">
               {new Set(Object.values(selectedUser)).size === 1 ? 'Add User' : 'Edit User'}
             </Typography>
@@ -52,23 +36,22 @@ export default function SelectedUserForm(props: IProps) {
                   key={name}
                   label={name}
                   name={name}
-                  defaultValue={value}
-                  onChange={onChange}
+                  value={value}
+                  onChange={handleChangeValue}
                 />
               ))}
             </form>
-          </>
-        )}
+          </Paper>
+          <div>
+            <SaveBtn 
+              handleSaveBtnClick={handleSaveBtnClick}
+            />
+            <CancelBtn 
+              handleCancleBtnClick={handleCancleBtnClick}
+            />
+          </div>
+        </>
+      )}
     </SelectedUserFormContainer>
-    </Paper>
-    <div>
-      <SaveBtn 
-        handleSaveBtnClick={handleSaveBtnClick}
-      />
-      <CancelBtn 
-        handleCancleBtnClick={handleCancleBtnClick}
-      />
-    </div>
-    </>
   )
 }

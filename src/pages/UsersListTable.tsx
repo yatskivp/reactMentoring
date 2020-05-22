@@ -9,7 +9,7 @@ import Loader from '../components/Loader';
 import Notification from '../components/Notifications';
 import AddUserBtn from '../components/AddUserBtn';
 import { columns } from '../utils';
-import { IState } from '../store';
+import { IStore } from '../store';
 
 interface IProps {
   handleFormVisibility: (isFormVisible: boolean) => void,
@@ -27,8 +27,8 @@ export default (props: IProps) => {
     props.handleFormVisibility(true);
   }
 
-  const isLoading = useSelector(({ users }: IState) => users.isLoading);
-  const error = useSelector(({ users }: IState) => users.error);
+  const isLoading = useSelector(({ users }: IStore) => users.isLoading);
+  const error = useSelector(({ users }: IStore) => users.error);
 
   return (
     <>
