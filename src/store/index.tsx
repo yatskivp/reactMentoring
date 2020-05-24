@@ -6,6 +6,6 @@ export const rootReducer = combineReducers({
   users: usersReducer,
 });
 
-export interface IState {
+export interface IStore {
   users: IUsersListState,
 };

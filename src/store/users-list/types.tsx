@@ -1,6 +1,9 @@
 export enum actionTypes {
-  SET_USERS = '@@users/SET_USERS',
-  SET_SELECTED_USER = '@@users/SET_SELECTED_USER',
+  SET_USERS_REQUEST = '@@users/SET_USERS_REQUEST',
+  SET_USERS_SUCCESS = '@@users/SET_USERS_SUCCESS',
+  SET_USERS_FAIL = '@@users/SET_USERS_FAIL',
+  SET_SELECTED_USER_SUCCESS = '@@users/SET_SELECTED_USER_SUCCESS',
+  EDIT_SELECTED_USER_SUCCESS = '@@users/EDIT_SELECTED_USER_SUCCESS',
 };
 
 export interface IUser {
@@ -8,15 +11,16 @@ export interface IUser {
   lname: string,
   email: string,
   gender: string,
-  loginInfo: {
-    dateTime: string,
-    ipv4: string,
-  },
+  address: string,
+  mobile: string,
   id: string,
+  [index: string]: string,
 };
 
 export interface IUsersListState {
   readonly users: IUser[],
   readonly selectedUser: IUser,
   readonly isUserSelected?: boolean,
+  readonly isLoading?: boolean,
+  readonly error?: string,
 };

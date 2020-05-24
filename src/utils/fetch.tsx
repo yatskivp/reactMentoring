@@ -1,12 +1,22 @@
-import axios from 'axios';
+import axios, { Method } from 'axios';
 
-interface Options {
+interface IPayload {
+  [index: string]: any,
+}
+
+interface IOptions {
   url: string,
-  [index: string]: any
+  method: Method,
+  [index: string]: string | object,
+}
+
+export interface IParams {
+  payload: IPayload,
+  options: IOptions
 };
 
-export default async (payload: any, options: Options) => {
-  const {method = 'post', url = ''} = options;
+export default async ({ payload, options }: IParams) => {
+  const {method, url = ''} = options;
   const result = await axios({
     method,
     url,
