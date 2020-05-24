@@ -1,8 +1,7 @@
-import React, {useState} from 'react'
+import React, { useState, lazy, Suspense } from 'react'
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import UsersListTable from './UsersListTable';
-import SelectedUser from './SelectedUser';
+import Loader from '../components/Loader';
 
 type IHandleFormVisibility = (isFormVisible: boolean) => void;
 
@@ -16,14 +15,18 @@ export default function App() {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const handleFormVisibility: IHandleFormVisibility = (isFormVisible: boolean = false) => {setIsFormVisible(isFormVisible)};
   const classes = useStyles();
+  const UsersListTable = lazy(() => import('./UsersListTable'));
+  const SelectedUser = lazy(() => import('./SelectedUser'));
   
   return (
     <Grid className={classes.container} container>
       <Grid item>
-      {isFormVisible ?
-        (<SelectedUser />) :
-        (<UsersListTable  handleFormVisibility={handleFormVisibility}/>)
-      }
+      <Suspense fallback={<Loader />}>
+        {isFormVisible ?
+          (<SelectedUser />) :
+          (<UsersListTable  handleFormVisibility={handleFormVisibility}/>)
+        }
+      </Suspense>
       </Grid>
     </Grid>
   )
