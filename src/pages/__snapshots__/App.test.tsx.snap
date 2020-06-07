@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<WithStyles(ForwardRef(Grid))
+  className="makeStyles-container-1"
+  container={true}
+>
+  <WithStyles(ForwardRef(Grid))
+    item={true}
+  >
+    <ContextProvider
+      value={
+        Object {
+          "theme": "dark",
+          "toggleTheme": [Function],
+        }
+      }
+    >
+      <ToggleThemeBtn />
+      <Suspense
+        fallback={<_default />}
+      >
+        <lazy
+          handleFormVisibility={[Function]}
+        />
+      </Suspense>
+    </ContextProvider>
+  </WithStyles(ForwardRef(Grid))>
+</WithStyles(ForwardRef(Grid))>
+`;
