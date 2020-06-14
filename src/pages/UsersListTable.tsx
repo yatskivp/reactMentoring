@@ -13,6 +13,8 @@ import { IStore } from '../store';
 
 interface IProps {
   handleFormVisibility: (isFormVisible: boolean) => void,
+  isLoading?: boolean, 
+  error?: string
 }
 
 const useStyles = makeStyles({
@@ -21,29 +23,40 @@ const useStyles = makeStyles({
   }
 });
 
-export default (props: IProps) => {
+export const UsersListTable = (props: IProps) => {
   const classes = useStyles();
+  const { handleFormVisibility, isLoading, error } = props;
   const handleAddUserBtnClick: () => void = () => {
-    props.handleFormVisibility(true);
+    handleFormVisibility(true);
   }
 
+  return(
+    <>
+        { isLoading && <Loader /> }
+  
+        { error && <Notification status='error' message={error}/> }
+        <div className={classes.tableContainer}>
+          <AddUserBtn handleAddUserBtnClick={handleAddUserBtnClick}/>
+          <TableContainer>
+            <Table>
+              <TableHeader columns={columns}/>
+              <TableBody {...props} columns={columns}/>
+            </Table>
+          </TableContainer>
+        </div>
+      </>
+  );
+};
+
+export default (props: IProps) => {
   const isLoading = useSelector(({ users }: IStore) => users.isLoading);
   const error = useSelector(({ users }: IStore) => users.error);
 
   return (
-    <>
-      { isLoading && <Loader /> }
-
-      { error && <Notification status='error' message={error}/> }
-      <div className={classes.tableContainer}>
-        <AddUserBtn handleAddUserBtnClick={handleAddUserBtnClick}/>
-        <TableContainer>
-          <Table>
-            <TableHeader columns={columns}/>
-            <TableBody {...props} columns={columns}/>
-          </Table>
-        </TableContainer>
-      </div>
-    </>
+    <UsersListTable
+      isLoading={isLoading}
+      error={error}
+      { ...props }
+    />
   );   
 }

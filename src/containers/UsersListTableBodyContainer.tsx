@@ -15,7 +15,7 @@ interface IMapDispatchToProps {
   selectUser: (user: IUser) => void,
 };
 
-class UsersListTableBodyContainer extends React.Component<IProps & IMapDispatchToProps> {
+export class UsersListTableBodyContainer extends React.Component<IProps & IMapDispatchToProps> {
   static defaultProps: IProps;
   
   componentDidMount() {

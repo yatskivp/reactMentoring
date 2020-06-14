@@ -12,7 +12,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function Save(props: IProps) {
+export default function Cancel(props: IProps) {
   const classes = useStyles();
 
   return (
