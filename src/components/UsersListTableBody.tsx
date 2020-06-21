@@ -18,6 +18,7 @@ const rowStyles = {
 };
 
 const StyledTableRow = withStyles(rowStyles)(TableRow);
+StyledTableRow.displayName = 'TableRow';
 
 interface IProps {
   handleFormVisibility: (isFormVisible: boolean) => void,
